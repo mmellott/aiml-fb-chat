@@ -11,7 +11,7 @@ password = raw_input("password: ")
 jid = 'alice.mellott.1@chat.facebook.com'
 server = ('chat.facebook.com', 5222)
 
-chatbot = bot.AliceBot(jid,password)
+chatbot = bot.AliceBot(jid,password,"Alice")
 chatbot.auto_reconnect = True
 chatbot.connect(server)
 chatbot.process(block=False)

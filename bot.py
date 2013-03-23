@@ -6,16 +6,17 @@ import time
 class AliceBot(ClientXMPP):
 
     # the one and only ctor
-    def __init__(self, jid, password):
+    def __init__(self, jid, password, name):
         # init xmpp stuff
         ClientXMPP.__init__(self, jid, password)
         self.add_event_handler("session_start", self.session_start)
         self.add_event_handler("message", self.message)
 
         # init alice stuff
-        self.__k = aiml.Kernel()
-        self.__k.learn("std-startup.xml")
-        self.__k.respond("load aiml b")
+        self._k = aiml.Kernel()
+        self._k.learn("std-startup.xml")
+        self._k.respond("load aiml b")
+        self._k.setBotPredicate("name",name)
 
     # don't really understand what a session is
     def session_start(self, event):
@@ -30,7 +31,7 @@ class AliceBot(ClientXMPP):
 
             # get response
             # super easy sessions!
-            resp = self.__k.respond(msg['body'], msg['from'])
+            resp = self._k.respond(msg['body'], msg['from'])
 
             # try to not look like a bot?
             time.sleep(randrange(0,3))
