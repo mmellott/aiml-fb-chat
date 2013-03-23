@@ -7,7 +7,9 @@ import sys
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
 
-password = raw_input("password: ")
+if len(sys.argv) != 2: sys.exit("usage: chat.py password")
+
+password = sys.argv[1]
 jid = 'alice.mellott.1@chat.facebook.com'
 server = ('chat.facebook.com', 5222)
 
