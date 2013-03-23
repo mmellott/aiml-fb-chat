@@ -2,18 +2,29 @@
 import sleekxmpp
 import aiml
 import bot
+import signal
+import sys
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
 
-psswrd = raw_input("password: ")
-
+password = raw_input("password: ")
 jid = 'alice.mellott.1@chat.facebook.com'
-password = psswrd 
 server = ('chat.facebook.com', 5222)
 
 chatbot = bot.AliceBot(jid,password)
-#chatbot.add_event_handler('session_start', session_start)
-#chatbot.add_event_handler('message', message)
 chatbot.auto_reconnect = True
 chatbot.connect(server)
-chatbot.process(block=True)
+chatbot.process(block=False)
+
+# exit with grace
+def sigint_handler(signal, frame):
+        print "exit time"
+
+        global chatbot
+        chatbot.disconnect(wait=True)        
+        sys.exit(0)
+
+signal.signal(signal.SIGINT, sigint_handler)
+
+while True:
+    pass
