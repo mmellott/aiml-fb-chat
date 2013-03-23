@@ -5,10 +5,10 @@ import bot
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
 
-pass = raw_input("password: ")
+psswrd = raw_input("password: ")
 
 jid = 'alice.mellott.1@chat.facebook.com'
-password = pass 
+password = psswrd 
 server = ('chat.facebook.com', 5222)
 
 chatbot = bot.AliceBot(jid,password)
